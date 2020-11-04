@@ -1,0 +1,51 @@
+{
+    "name": "dicr/yii2-google-search-wdr",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "homepage": "https://gitlab.com/dicr/yii2-google-wdr",
+    "description": "Поиск Google через WebDriver-драйвер для Yii2",
+    "keywords": ["dicr", "yii2", "google", "search", "wdr"],
+    "authors": [
+        {
+            "name": "Igor Tarasov",
+            "email": "develop@dicr.org",
+            "homepage": "http://dicr.org",
+            "role": "developer"
+        }
+    ],
+    "support": {
+        "source": "https://gitlab.com/dicr/yii2-google-wdr.git"
+    },
+    "minimum-stability": "RC",
+    "prefer-stable": true,
+    "require": {
+        "php": "~7.3",
+
+        "yiisoft/yii2": "~2.0",
+
+        "dicr/yii2-anticaptcha": "~1.0",
+        "dicr/yii2-validate": "~2.2",
+
+        "php-webdriver/webdriver": "~1.8",
+        "simplehtmldom/simplehtmldom": "~2.0-RC2"
+    },
+    "autoload": {
+        "psr-4": {
+            "dicr\\google\\wdr\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "dicr\\tests\\": "tests/"
+        }
+    },
+    "repositories": [
+        {"type": "gitlab", "url": "https://gitlab.com/dicr/yii2-anticaptcha.git"},
+        {"type": "gitlab", "url": "https://gitlab.com/dicr/yii2-validate.git"},
+        {"type": "composer", "url": "https://asset-packagist.org"}
+    ],
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "phpunit/phpunit": "~9.4"
+    }
+}
