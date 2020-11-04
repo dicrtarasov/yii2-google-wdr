@@ -25,7 +25,7 @@ $googleWdr = Yii::$app->get('googleWdr');
 
 /** @var GoogleWdrRequest $req запрос создания задачи */
 $req = $googleWdr->searchRequest([
-    'query' => 'мобильная опера'
+    'query' => 'мыльная опера'
 ]);
 
 // выводим результаты
