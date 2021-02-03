@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2020 Dicr http://dicr.org
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 05.11.20 01:16:27
+ * @version 03.02.21 20:56:55
  */
 
 declare(strict_types = 1);
@@ -101,7 +101,7 @@ class GoogleWdrRequest extends Model
     /**
      * @inheritDoc
      */
-    public function attributeLabels() : array
+    public function attributeLabels(): array
     {
         return [
             'query' => 'Запрос',
@@ -114,7 +114,7 @@ class GoogleWdrRequest extends Model
     /**
      * {@inheritDoc}
      */
-    public function attributeHints() : array
+    public function attributeHints(): array
     {
         return [
             'device' => 'По-умолчанию - компьютер',
@@ -126,7 +126,7 @@ class GoogleWdrRequest extends Model
     /**
      * {@inheritDoc}
      */
-    public function rules() : array
+    public function rules(): array
     {
         return [
             ['query', 'trim'],
@@ -157,7 +157,7 @@ class GoogleWdrRequest extends Model
      * @throws NoSuchElementException
      * @throws TimeOutException
      */
-    private function createLinkByAPT() : string
+    private function createLinkByAPT(): string
     {
         $query = [
             'lang' => 'ru',
@@ -184,7 +184,7 @@ class GoogleWdrRequest extends Model
         $browser->get($urlApt);
 
         // ожидаем 10 сек загрузки фрейма
-        $frame = $browser->wait(10)->until(static function (RemoteWebDriver $browser) : RemoteWebElement {
+        $frame = $browser->wait(10)->until(static function(RemoteWebDriver $browser): RemoteWebElement {
             /** @var WebDriver $driver */
             return $browser->findElement(WebDriverBy::tagName('iframe'));
         }, 'Не удалось найти iframe');
@@ -203,7 +203,7 @@ class GoogleWdrRequest extends Model
      *
      * @return string
      */
-    private function createLinkByUULE() : string
+    private function createLinkByUULE(): string
     {
         $query = [
             'q' => $this->query,        // поисковый запрос
@@ -239,7 +239,7 @@ class GoogleWdrRequest extends Model
      * @throws ValidateException
      * @throws Exception
      */
-    public function send() : string
+    public function send(): string
     {
         if ($this->validate() === false) {
             throw new ValidateException($this);
@@ -273,9 +273,11 @@ class GoogleWdrRequest extends Model
             $this->_googleWdr->checkCaptcha($browser);
 
             // дожидаемся появления результатов поиска
-            $browser->wait(10)->until(static function (RemoteWebDriver $browser) : RemoteWebElement {
-                return $browser->findElement(WebDriverBy::id('search'));
-            }, 'Не удалось найти результаты поиска');
+            $browser->wait(10)->until(
+                static fn(RemoteWebDriver $browser
+                ): RemoteWebElement => $browser->findElement(WebDriverBy::id('search')),
+                'Не удалось найти результаты поиска'
+            );
 
             // сохраняем в кеше страницу
             $html = $browser->getPageSource();
@@ -307,7 +309,7 @@ class GoogleWdrRequest extends Model
      * @throws Exception
      * @throws ValidateException
      */
-    public function getHtml() : string
+    public function getHtml(): string
     {
         if ($this->_html === null) {
             $this->_html = $this->send();
@@ -326,7 +328,7 @@ class GoogleWdrRequest extends Model
      * @throws Exception
      * @throws ValidateException
      */
-    public function getResults() : array
+    public function getResults(): array
     {
         if ($this->_results === null) {
             $this->results = GoogleWdr::parseHtml($this->getHtml());

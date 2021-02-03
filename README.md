@@ -7,10 +7,12 @@
 ## Настройка компонента
 
 ```php
-'components' => [
-    'googleWdr' => [
-        'class' => dicr\google\wdr\GoogleWdr::class,
-        'driverUrl' => 'url web-драйвера'
+$config = [
+    'components' => [
+        'googleWdr' => [
+            'class' => dicr\google\wdr\GoogleWdr::class,
+            'driverUrl' => 'url web-драйвера'
+        ]
     ]
 ];
 ```
@@ -18,7 +20,8 @@
 ## Использование
 
 ```php
-use dicr\google\wdr\GoogleWdr;use dicr\google\wdr\GoogleWdrRequest;
+use dicr\google\wdr\GoogleWdr;
+use dicr\google\wdr\GoogleWdrRequest;
 
 /** @var GoogleWdr $googleWdr модуль */
 $googleWdr = Yii::$app->get('googleWdr');

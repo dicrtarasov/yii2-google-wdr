@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2020 Dicr http://dicr.org
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 05.11.20 01:58:20
+ * @version 03.02.21 20:56:08
  */
 
 declare(strict_types = 1);
@@ -78,7 +78,7 @@ class GoogleWdr extends Component
      * @inheritDoc
      * @throws InvalidConfigException
      */
-    public function init() : void
+    public function init(): void
     {
         parent::init();
 
@@ -118,7 +118,7 @@ class GoogleWdr extends Component
      * @param ?array $data если не null, то сохраняет новые данные
      * @return array текущие данные
      */
-    private function moduleData(?array $data = null) : array
+    private function moduleData(?array $data = null): array
     {
         $key = [__CLASS__, $this->driverUrl];
 
@@ -128,9 +128,10 @@ class GoogleWdr extends Component
         // если заданы данные для установки
         if ($data !== null) {
             // добавляем новые данные
-            $currentData = array_filter(array_merge($currentData, $data), static function ($val) : bool {
-                return $val !== null;
-            });
+            $currentData = array_filter(
+                array_merge($currentData, $data),
+                static fn($val): bool => $val !== null
+            );
 
             // сохраняем новые данные
             Yii::$app->cache->set($key, $currentData);
@@ -149,7 +150,7 @@ class GoogleWdr extends Component
      * @return RemoteWebDriver
      * @throws Exception
      */
-    public function getBrowser() : RemoteWebDriver
+    public function getBrowser(): RemoteWebDriver
     {
         // если уже имеется подключение к браузеру
         if ($this->_browser !== null) {
@@ -203,7 +204,7 @@ class GoogleWdr extends Component
     /**
      * Задержка между запросами.
      */
-    public function pause() : void
+    public function pause(): void
     {
         if ($this->requestDelay > 0) {
             $sessionData = $this->moduleData();
@@ -229,7 +230,7 @@ class GoogleWdr extends Component
      * @param RemoteWebDriver $browser
      * @throws Exception
      */
-    public function checkCaptcha(RemoteWebDriver $browser) : void
+    public function checkCaptcha(RemoteWebDriver $browser): void
     {
         try {
             $captcha = $browser->findElement(WebDriverBy::id('recaptcha'));
@@ -298,7 +299,7 @@ class GoogleWdr extends Component
      * @param string $html html-страница с результатами поиска
      * @return array конфиг результата поиска
      */
-    public static function parseHtml(string $html) : array
+    public static function parseHtml(string $html): array
     {
         $results = [];
 
@@ -356,7 +357,7 @@ class GoogleWdr extends Component
      * @param string $city регион, город поиска
      * @return string параметр uule
      */
-    public static function createUULE(string $city) : string
+    public static function createUULE(string $city): string
     {
         if (empty($city)) {
             throw new InvalidArgumentException('empty city');
@@ -378,7 +379,7 @@ class GoogleWdr extends Component
      * @param array $config
      * @return GoogleWdrRequest
      */
-    public function searchRequest(array $config = []) : GoogleWdrRequest
+    public function searchRequest(array $config = []): GoogleWdrRequest
     {
         return new GoogleWdrRequest($this, $config + $this->requestConfig);
     }

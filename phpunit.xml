@@ -1,13 +1,13 @@
 <!--
-  ~ @copyright 2019-2020 Dicr http://dicr.org
+  ~ @copyright 2019-2021 Dicr http://dicr.org
   ~ @author Igor A Tarasov <develop@dicr.org>
   ~ @license MIT
-  ~ @version 29.10.20 04:18:01
+  ~ @version 03.02.21 20:54:47
   -->
 
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.4/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
         bootstrap="tests/bootstrap.php"
 >
     <testsuites>

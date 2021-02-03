@@ -1,9 +1,9 @@
 <?php
 /*
- * @copyright 2019-2020 Dicr http://dicr.org
+ * @copyright 2019-2021 Dicr http://dicr.org
  * @author Igor A Tarasov <develop@dicr.org>
  * @license MIT
- * @version 05.11.20 02:04:16
+ * @version 03.02.21 20:55:40
  */
 
 declare(strict_types = 1);
@@ -29,7 +29,6 @@ class MethodTest extends TestCase
      */
     private static function googleWdr() : GoogleWdr
     {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
         return Yii::$app->get('googleWdr');
     }
 
@@ -37,6 +36,7 @@ class MethodTest extends TestCase
      * Тест парсинга HTML-страницы результатов.
      *
      * @noinspection PhpMethodMayBeStaticInspection
+     * @noinspection PhpUnitMissingTargetForTestInspection
      */
     public function testHtmlParse() : void
     {
